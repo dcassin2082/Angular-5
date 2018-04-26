@@ -1,0 +1,104 @@
+.row-name{
+    width: 30%;
+}
+.row-company{
+    width: 60%;
+}
+.row-edit{
+    width: 5%;
+}
+.row-delete{
+    width: 5%;
+}
+th:nth-child(3), td:nth-child(3){
+    width: 120px;
+  }
+  td:nth-child(3){
+    overflow-wrap: break-word;
+  }
+  th:nth-child(4), td:nth-child(4){
+    width: 180px;
+  }
+  td:nth-child(4){
+    overflow-wrap: break-word;
+  }
+  th:nth-child(1), td:nth-child(1){
+    width: 45px;
+  }
+  th:nth-child(2), td:nth-child(2){
+    width: 45px;
+  }
+  table {
+      table-layout: fixed !important;
+  }
+  table td {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  table{
+    table-layout: fixed;
+}
+.td-wrap{
+    overflow-wrap: break-word !important;
+}
+.table-container {
+    height: 20em;
+}
+table.scrollable {
+    display: flex;
+    flex-flow: column;
+    height: 100%;
+    width: 100%;
+    position:relative;
+}
+table.scrollable thead {
+    /* head takes the height it requires, 
+    and it's not scaled when table is resized */
+    flex: 0 0 auto;
+    display: block;
+    overflow-y: scroll;
+}
+table.scrollable tbody {
+    /* body takes all the remaining available space */
+    flex: 1 1 auto;
+    display: block;
+    overflow-y: scroll;
+}
+table.scrollable tr {
+    width: 100%;
+    display: table;
+    table-layout: fixed;
+}
+table.scrollable thead:before
+{ 
+	position: absolute;
+  right:0em;
+	width: 1em;
+	height: 1.2em;
+	content: '';
+	background-color: menu;
+  margin-top: 0em;
+}
+table.scrollable thead:after
+{ 
+	position: absolute;
+  right:0em;
+	width: 1em;
+	height: 1.2em;
+	content: '';
+	background-color: menu;
+  margin-top: -1.2em;
+}
+
+/* decorations */
+.table-container {
+    // border: 1px solid black;
+    padding: 0.3em;
+}
+// table {
+//     border: 1px solid lightgrey;
+// }
+table td, table th {
+    padding: 0.3em;
+    border: 1px solid lightgrey;
+}

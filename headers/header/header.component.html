@@ -1,0 +1,55 @@
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-navbar">
+  <a class="navbar-brand" routerLink="/home" routerLinkActive="active">
+    <img src="/assets/angular-logo.png" width="100" height="60" alt="">
+  </a>
+  <a class="navbar-brand" routerLink="/home" routerLinkActive="active">
+    <h3>Jungle Technology</h3>
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+    aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="navbar-collapse collapse " id="navbarSupportedContent">
+    <ul *ngIf="userService.loggedIn" class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/home" routerLinkActive="active">Home
+          <span class="sr-only">(current)</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/contacts" routerLinkActive="active">Contacts</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/customers" routerLinkActive="active">Customers</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/employees" routerLinkActive="active">Employees</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/products" routerLinkActive="active">Products</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/suppliers" routerLinkActive="active">Suppliers</a>
+      </li>
+      <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Admin</a>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" routerLink="/roles" routerLinkActive="active">Roles</a>
+            <a class="dropdown-item" href="#">Another action</a>
+            <a class="dropdown-item" href="#">Something else here</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Separated link</a>
+          </div>
+        </li>
+
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <button *ngIf="!userService.loggedIn" class="btn btn-lg btn-outline-light mr-sm-2 my-2 my-sm-0" (click)="login()" type="button">
+        <i class="fa fa-sign-in"></i> Login</button>
+      <button *ngIf="!userService.loggedIn" class="btn btn-lg btn-outline-light mr-sm-2 my-2 my-sm-0" (click)="register()" type="button">
+        <i class="fa fa-user"></i> Register</button>
+      <button *ngIf="userService.loggedIn" class="btn btn-lg btn-outline-light mr-sm-2 my-2 my-sm-0" (click)="logout()" type="button">
+        <i class="fa fa-sign-out"></i> Logout</button>
+    </form>
+  </div>
+</nav>

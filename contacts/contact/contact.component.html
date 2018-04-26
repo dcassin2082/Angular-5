@@ -1,0 +1,60 @@
+  <form name="ContactForm" #ContactForm="ngForm" (ngSubmit)="onSubmit(ContactForm)" class="crud-form">
+    <input type="hidden" name="ContactID" #ContactID="ngModel" [(ngModel)]="contactService.contact.ContactID">
+    <div class="form-row">
+      <div class="form-group pb-4 col-md-6">
+        <label for="FirstName" class="control-label text-muted crud-label">First Name</label>
+        <input name="FirstName" #FirstName="ngModel" [(ngModel)]="contactService.contact.FirstName" required placeholder="First Name"
+          class="form-control">
+        <div class="validation-error" *ngIf="FirstName.invalid && (FirstName.dirty || FirstName.isSubmitted)">
+          Required field
+        </div>
+      </div>
+      <div class="form-group pb-4 col-md-6">
+        <label for="LastName" class="control-label text-muted crud-label">Last Name</label>
+        <input name="LastName" #LastName="ngModel" [(ngModel)]="contactService.contact.LastName" required placeholder="Last Name"
+          class="form-control">
+        <div class="validation-error" *ngIf="LastName.invalid && (LastName.dirty || LastName.isSubmitted)">
+          Required field
+        </div>
+      </div>
+    </div>
+    <div class="form-group pb-4">
+      <label for="Company" class="control-label text-muted crud-label">Company</label>
+      <input name="Company" #Company="ngModel" [(ngModel)]="contactService.contact.Company" required placeholder="Company"
+        class="form-control">
+      <div class="validation-error" *ngIf="Company.invalid && (Company.dirty || Company.isSubmitted)">
+        Required field
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="col-md-5 pb-4 form-group">
+        <label for="Phone" class="control-label text-muted crud-label">Phone</label>
+        <input mask="(000)-000-0000" name="Phone" #Phone="ngModel" [(ngModel)]="contactService.contact.Phone" required placeholder="Phone" class="form-control">
+        <div class="validation-error" *ngIf="Phone.invalid && (Phone.dirty || Phone.isSubmitted)">
+          Required field
+        </div>
+      </div>
+      <div class="col-md-7 pb-4 form-group">
+        <label for="EmailAddress" class="control-label text-muted crud-label">Email</label>
+        <input email name="EmailAddress" #EmailAddress="ngModel" [(ngModel)]="contactService.contact.EmailAddress" required placeholder="Email"
+          class="form-control">
+          <div *ngIf="EmailAddress.invalid && (EmailAddress.touched || EmailAddress.isSubmitted)" class="validation-error">
+              Email is required.
+            </div>
+            <div class="validation-error" *ngIf="EmailAddress.invalid && EmailAddress.touched && EmailAddress.errors?.email">Invalid email.</div>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group pb-2 col-md-8 gradient-buttons">
+        <button class="btn btn-primary btn-lg btn-block" [disabled]="!ContactForm.valid" type="submit">
+          <i class="fa fa-save"></i> Submit
+        </button>
+      </div>
+      <div class="form-group pb-2 col-md-4 gradient-buttons">
+        <button class="btn btn-lg btn-secondary btn-block" (click)="resetForm(ContactForm)" type="button">
+          <i class="fa fa-repeat"></i> Reset
+        </button>
+      </div>
+    </div>
+  </form>
+  

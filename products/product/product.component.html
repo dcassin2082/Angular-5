@@ -1,0 +1,64 @@
+<form name="ProductForm" #ProductForm="ngForm" (ngSubmit)="onSubmit(ProductForm)" class="crud-form"> 
+  <input type="hidden" name="ProductId" #ProductId="ngModel" [(ngModel)]="productService.product.ProductId">
+  <div class="form-row">
+    <div class="form-group pb-4 col-md-6">
+      <label for="Name" class="control-label text-muted crud-label">Product Name</label>
+      <input name="Name" #Name="ngModel" [(ngModel)]="productService.product.Name" required placeholder="Name" class="form-control">
+      <div class="validation-error" *ngIf="Name.invalid && (Name.dirty || Name.isSubmitted)">
+        Required field
+      </div>
+    </div>
+    <div class="form-group pb-4 col-md-6">
+      <label for="SKU" class="control-label text-muted crud-label">Product SKU</label>
+      <input name="SKU" #SKU="ngModel" [(ngModel)]="productService.product.SKU" required placeholder="SKU" class="form-control">
+      <div class="validation-error" *ngIf="SKU.invalid && (SKU.dirty || SKU.isSubmitted)">
+        Required field
+      </div>
+    </div>
+  </div>
+  <div class="form-group pb-4">
+    <label for="Description" class="control-label text-muted crud-label">Product Description</label>
+    <input name="Description" #Description="ngModel" [(ngModel)]="productService.product.Description" required placeholder="Description"
+      class="form-control">
+    <div class="validation-error" *ngIf="Description.invalid && (Description.dirty || Description.isSubmitted)">
+      Required field
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="col-md-6 pb-4 form-group">
+      <label for="RetailPrice" class="control-label text-muted crud-label">Retail Price</label>
+      <input name="RetailPrice" type="number" #RetailPrice="ngModel" [(ngModel)]="productService.product.RetailPrice" required placeholder="Retail Price"
+        class="form-control">
+      <div class="validation-error" *ngIf="RetailPrice.invalid && (RetailPrice.dirty || RetailPrice.isSubmitted)">
+        Required field
+      </div>
+    </div>
+    <div class="col-md-6 pb-4 form-group">
+      <label for="Cost" class="control-label text-muted crud-label">Cost</label>
+      <input name="Cost" type="number" #Cost="ngModel" [(ngModel)]="productService.product.Cost" required placeholder="Cost" class="form-control">
+      <div class="validation-error" *ngIf="Cost.invalid && (Cost.dirty || Cost.isSubmitted)">
+        Required field
+      </div>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group pb-2 col-md-8 gradient-buttons">
+      <button class="btn btn-primary btn-lg btn-block" [disabled]="!ProductForm.valid" type="submit">
+        <i class="fa fa-save"></i> Submit
+      </button>
+    </div>
+    <div class="form-group pb-2 col-md-4 gradient-buttons">
+      <button class="btn btn-lg btn-secondary btn-block" (click)="resetForm(ProductForm)" type="button">
+        <i class="fa fa-repeat"></i> Reset
+      </button>
+    </div>
+  </div>
+  <!-- <div class="form-row">
+    <div class="form-group col-md-6">
+        <select class='form-control select-option' name="ddl" #ddl="ngModel" required [(ngModel)]='optionSelected' (ngModelChange)='onOptionsSelected($event)'>
+            <option class='option' *ngFor='let option of options' [value]="option">{{option}}</option>
+        </select>
+    </div>
+  </div> -->
+
+</form>

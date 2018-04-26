@@ -1,0 +1,164 @@
+<div class="crud-container">
+  <div class="row">
+    <div class="col-md-8">
+      <input class="form-control" type="search" name="search" #search="ngModel" [(ngModel)]="filter" placeholder="Search" aria-label="Search">
+    </div>
+    <div class="col-md-4 gradient-buttons">
+      <button [disabled]="!filter" class="btn btn-secondary btn-block" type="button" (click)="clearSearch()">
+        <i class="fa fa-repeat"></i> Clear
+      </button>
+    </div>
+  </div>
+  <div class="table-container card-background">
+    <table class="scrollable table table-sm table-hover table-striped">
+      <thead>
+        <tr>
+          <th class="tbl-header-nolink row-edit text-muted text-center">
+            <i class="fa fa-check"></i>
+          </th>
+          <th class="tbl-header-nolink row-delete text-muted text-center">
+            <i class="fa fa-times"></i>
+          </th>
+          <th class="tbl-header-link row-name text-muted" (click)="sort('FirstName')">
+            Name
+            <span *ngIf="key =='FirstName'">
+              <i class="fa fa-sort"></i>
+            </span>
+          </th>
+          <th class="tbl-header-link row-company text-muted" (click)="sort('Company')">
+            Company
+            <span *ngIf="key =='Company'">
+              <i class="fa fa-sort"></i>
+            </span>
+          </th>
+
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let contact of contactService.contacts | orderBy: key : reverse | filter : filter | paginate: { itemsPerPage:10, currentPage: p};">
+          <td class="td-wrap">
+            <a title="Edit" (click)="showForEdit(contact)" class="btn text-primary">
+              <i class="fa fa-pencil-square-o"></i>
+            </a>
+          </td>
+          <td>
+            <a title="Delete" (click)="onDelete(contact.ContactID)" class="btn text-danger">
+              <i class="fa fa-trash-o"></i>
+            </a>
+          </td>
+          <td>
+            <a role="button" class="btn btn-link" data-toggle="modal" data-target="#contactModal">
+              <span class="tbl-element-link">{{contact.FirstName}} {{contact.LastName}}</span>
+            </a>
+          </td>
+          <td class="td-wrap">
+            <a role="button" class="btn btn-link" (click)="showForEdit(contact)">
+              <span class="tbl-element-link">{{contact.Company}}</span>
+            </a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <pagination-controls (pageChange)="p = $event" maxSize="5" boundaryLinks=true directionLinks="true" autoHide="true" previousLabel="Previous"
+    nextLabel="Next" screenReaderPaginationLabel="Pagination" screenReaderPageLabel="page" screenReaderCurrentLabel="You're on page">
+  </pagination-controls>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          ...
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div><!-- Modal -->
+<div class="modal fade" id="contactModal" tabindex="-1" role="dialog" aria-labelledby="contactModal" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Contact Info</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <form name="ContactModalForm" #ContactModalForm="ngForm" (ngSubmit)="onSubmit(ContactModalForm)" class="crud-form">
+              <input type="hidden" name="ContactID" #ContactID="ngModel" [(ngModel)]="contactService.contact.ContactID">
+              <div class="form-row">
+                <div class="form-group pb-4 col-md-6">
+                  <label for="FirstName" class="control-label text-muted crud-label">First Name</label>
+                  <input name="FirstName" #FirstName="ngModel" [(ngModel)]="contactService.contact.FirstName" required placeholder="First Name"
+                    class="form-control">
+                  <div class="validation-error" *ngIf="FirstName.invalid && (FirstName.dirty || FirstName.isSubmitted)">
+                    Required field
+                  </div>
+                </div>
+                <div class="form-group pb-4 col-md-6">
+                  <label for="LastName" class="control-label text-muted crud-label">Last Name</label>
+                  <input name="LastName" #LastName="ngModel" [(ngModel)]="contactService.contact.LastName" required placeholder="Last Name"
+                    class="form-control">
+                  <div class="validation-error" *ngIf="LastName.invalid && (LastName.dirty || LastName.isSubmitted)">
+                    Required field
+                  </div>
+                </div>
+              </div>
+              <div class="form-group pb-4">
+                <label for="Company" class="control-label text-muted crud-label">Company</label>
+                <input name="Company" #Company="ngModel" [(ngModel)]="contactService.contact.Company" required placeholder="Company"
+                  class="form-control">
+                <div class="validation-error" *ngIf="Company.invalid && (Company.dirty || Company.isSubmitted)">
+                  Required field
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="col-md-5 pb-4 form-group">
+                  <label for="Phone" class="control-label text-muted crud-label">Phone</label>
+                  <input mask="(000)-000-0000" name="Phone" #Phone="ngModel" [(ngModel)]="contactService.contact.Phone" required placeholder="Phone" class="form-control">
+                  <div class="validation-error" *ngIf="Phone.invalid && (Phone.dirty || Phone.isSubmitted)">
+                    Required field
+                  </div>
+                </div>
+                <div class="col-md-7 pb-4 form-group">
+                  <label for="EmailAddress" class="control-label text-muted crud-label">Email</label>
+                  <input email name="EmailAddress" #EmailAddress="ngModel" [(ngModel)]="contactService.contact.EmailAddress" required placeholder="Email"
+                    class="form-control">
+                    <div *ngIf="EmailAddress.invalid && (EmailAddress.touched || EmailAddress.isSubmitted)" class="validation-error">
+                        Email is required.
+                      </div>
+                      <div class="validation-error" *ngIf="EmailAddress.invalid && EmailAddress.touched && EmailAddress.errors?.email">Invalid email.</div>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group pb-2 col-md-8 gradient-buttons">
+                  <button class="btn btn-primary btn-lg btn-block" [disabled]="!ContactModalForm.valid" type="submit">
+                    <i class="fa fa-save"></i> Submit
+                  </button>
+                </div>
+                <div class="form-group pb-2 col-md-4 gradient-buttons">
+                  <button class="btn btn-lg btn-secondary btn-block" (click)="resetForm(ContactModalForm)" type="button">
+                    <i class="fa fa-repeat"></i> Reset
+                  </button>
+                </div>
+              </div>
+            </form>
+            
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>

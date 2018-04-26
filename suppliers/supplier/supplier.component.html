@@ -1,0 +1,78 @@
+<form name="SupplierForm" #SupplierForm="ngForm" (ngSubmit)="onSubmit(SupplierForm)" class="crud-form">
+  <input type="hidden" name="SupplierId" #SupplierId="ngModel" [(ngModel)]="supplierService.supplier.SupplierId">
+  <div class="form-group pb-2">
+    <label for="Name" class="control-label text-muted crud-label">Name</label>
+    <input name="Name" #Name="ngModel" [(ngModel)]="supplierService.supplier.Name" required placeholder="Name" class="form-control">
+    <div class="validation-error" *ngIf="Name.invalid && (Name.dirty || Name.isSubmitted)">
+      Required field
+    </div>
+  </div>
+  <div class="form-group pb-2">
+    <label for="Address" class="control-label text-muted crud-label">Address</label>
+    <input name="Address" #Address="ngModel" [(ngModel)]="supplierService.supplier.Address" required placeholder="Address"
+      class="form-control">
+    <div class="validation-error" *ngIf="Address.invalid && (Address.dirty || Address.isSubmitted)">
+      Required field
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group pb-2 col-md-4">
+      <label for="City" class="control-label text-muted crud-label">City</label>
+      <input name="City" #City="ngModel" [(ngModel)]="supplierService.supplier.City" required placeholder="City" class="form-control">
+      <div class="validation-error" *ngIf="City.invalid && (City.dirty || City.isSubmitted)">
+        Required field
+      </div>
+    </div>
+    <div class="col-md-4 pb-2 form-group" [class.has-error]="State.touched && State.invalid">
+        <label for="State" class="control-label text-muted crud-label">State</label>
+        <select appSelectRequiredValidator name="State" #State="ngModel" [(ngModel)]="supplierService.supplier.State" required class="form-control">
+          <option value="-1">--Select--</option>
+          <option [value]="s.Abbreviation"  *ngFor="let s of states">
+            {{s.Abbreviation}} - {{s.Name}}
+          </option> 
+        </select>
+        <div class="validation-error" *ngIf="State.touched && State.invalid">
+          State is required
+        </div>
+      </div>
+    <div class="form-group pb-2 col-md-4">
+      <label for="Zip" class="control-label text-muted crud-label">Zip</label>
+      <input mask="00000-0000" name="Zip" #Zip="ngModel" [(ngModel)]="supplierService.supplier.Zip" required placeholder="Zip"
+        class="form-control">
+      <div class="validation-error" *ngIf="Zip.invalid && (Zip.dirty || Zip.isSubmitted)">
+        Required field
+      </div>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group pb-2 col-md-4">
+      <label for="Phone" class="control-label text-muted crud-label">Phone</label>
+      <input mask="(000)-000-0000" name="Phone" #Phone="ngModel" [(ngModel)]="supplierService.supplier.Phone" required placeholder="Phone"
+        class="form-control">
+      <div class="validation-error" *ngIf="Phone.invalid && (Phone.dirty || Phone.isSubmitted)">
+        Required field
+      </div>
+    </div>
+    <div class="form-group pb-2 col-md-8">
+      <label for="EmailAddress" class="control-label text-muted crud-label">Email</label>
+      <input email name="EmailAddress" #EmailAddress="ngModel" [(ngModel)]="supplierService.supplier.EmailAddress" required placeholder="Email"
+        class="form-control">
+        <div *ngIf="EmailAddress.invalid && (EmailAddress.touched || EmailAddress.isSubmitted)" class="validation-error">
+            Email is required.
+          </div>
+          <div class="validation-error" *ngIf="EmailAddress.invalid && EmailAddress.touched && EmailAddress.errors?.email">Invalid email.</div>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-8 gradient-buttons">
+      <button class="btn btn-primary btn-lg btn-block" [disabled]="!SupplierForm.valid" type="submit">
+        <i class="fa fa-save"></i> Submit
+      </button>
+    </div>
+    <div class="form-group col-md-4 gradient-buttons">
+      <button class="btn btn-lg btn-secondary btn-block" (click)="resetForm(SupplierForm)" type="button">
+        <i class="fa fa-repeat"></i> Reset
+      </button>
+    </div>
+  </div>
+</form>

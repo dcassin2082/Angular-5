@@ -1,0 +1,68 @@
+<form name="EmployeeForm" #EmployeeForm="ngForm" (ngSubmit)="onSubmit(EmployeeForm)" class="crud-form">
+  <input type="hidden" name="EmployeeID" #EmployeeID="ngModel" [(ngModel)]="employeeService.employee.EmployeeID">
+  <div class="form-row">
+    <div class="form-group pb-2 col-md-6">
+      <label for="FirstName" class="control-label text-muted crud-label">First Name</label>
+      <input name="FirstName" #FirstName="ngModel" [(ngModel)]="employeeService.employee.FirstName" required placeholder="First Name"
+        class="form-control">
+      <div class="validation-error" *ngIf="FirstName.invalid && (FirstName.dirty || FirstName.isSubmitted)">
+        Required field
+      </div>
+    </div>
+    <div class="form-group pb-2 col-md-6">
+      <label for="LastName" class="control-label text-muted crud-label">Last Name</label>
+      <input name="LastName" #LastName="ngModel" [(ngModel)]="employeeService.employee.LastName" required placeholder="Last Name"
+        class="form-control">
+      <div class="validation-error" *ngIf="LastName.invalid && (LastName.dirty || LastName.isSubmitted)">
+        Required field
+      </div>
+    </div>
+  </div>
+  <div class="form-group pb-2">
+    <label for="Position" class="control-label text-muted crud-label">Position</label>
+    <input name="Position" #Position="ngModel" [(ngModel)]="employeeService.employee.Position" required placeholder="Position"
+      class="form-control">
+    <div class="validation-error" *ngIf="Position.invalid && (Position.dirty || Position.isSubmitted)">
+      Required field
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="col-md-6 pb-2 form-group">
+      <label for="Office" class="control-label text-muted crud-label">Office</label>
+      <input name="Office" #Office="ngModel" [(ngModel)]="employeeService.employee.Office" required placeholder="Office"
+        class="form-control">
+      <div class="validation-error" *ngIf="Office.invalid && (Office.dirty || Office.isSubmitted)">
+        Required field
+      </div>
+    </div>
+    <div class="col-md-6 pb-2 form-group">
+      <label for="EmpCode" class="control-label text-muted crud-label">Employee Code</label>
+      <input name="EmpCode" #EmpCode="ngModel" [(ngModel)]="employeeService.employee.EmpCode" required placeholder="Emp Code"
+        class="form-control">
+      <div class="validation-error" *ngIf="EmpCode.invalid && (EmpCode.dirty || EmpCode.isSubmitted)">
+        Required field
+      </div>
+    </div>
+  </div>
+  <div class="pb-2 form-group">
+    <label for="EmailAddress" class="control-label text-muted crud-label">Email</label>
+    <input email name="EmailAddress" #EmailAddress="ngModel" [(ngModel)]="employeeService.employee.EmailAddress" required placeholder="Email"
+      class="form-control">
+      <div *ngIf="EmailAddress.invalid && (EmailAddress.touched || EmailAddress.isSubmitted)" class="validation-error">
+          Email is required.
+        </div>
+        <div class="validation-error" *ngIf="EmailAddress.invalid && EmailAddress.touched && EmailAddress.errors?.email">Invalid email.</div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-8 gradient-buttons">
+      <button class="btn btn-primary btn-lg btn-block" [disabled]="!EmployeeForm.valid" type="submit">
+        <i class="fa fa-save"></i> Submit
+      </button>
+    </div>
+    <div class="form-group col-md-4 gradient-buttons">
+      <button class="btn btn-lg btn-secondary btn-block" (click)="resetForm(EmployeeForm)" type="button">
+        <i class="fa fa-repeat"></i> Reset
+      </button>
+    </div>
+  </div>
+</form>

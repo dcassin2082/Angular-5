@@ -1,0 +1,88 @@
+<form name="CustomerForm" #CustomerForm="ngForm" (ngSubmit)="onSubmit(CustomerForm)" class="crud-form">
+  <input type="hidden" name="CustomerID" #CustomerID="ngModel" [(ngModel)]="customerService.customer.CustomerID">
+  <div class="form-row">
+    <div class="form-group pb-2 col-md-6">
+      <label for="FirstName" class="control-label text-muted crud-label">First Name</label>
+      <input name="FirstName" #FirstName="ngModel" [(ngModel)]="customerService.customer.FirstName" required placeholder="First Name"
+        class="form-control">
+      <div class="validation-error" *ngIf="FirstName.invalid && (FirstName.dirty || FirstName.isSubmitted)">
+        Required field
+      </div>
+    </div>
+    <div class="form-group pb-2 col-md-6">
+      <label for="LastName" class="control-label text-muted crud-label">Last Name</label>
+      <input name="LastName" #LastName="ngModel" [(ngModel)]="customerService.customer.LastName" required placeholder="Last Name"
+        class="form-control">
+      <div class="validation-error" *ngIf="LastName.invalid && (LastName.dirty || LastName.isSubmitted)">
+        Required field
+      </div>
+    </div>
+  </div>
+  <div class="form-group pb-2">
+    <label for="Address" class="control-label text-muted crud-label">Address</label>
+    <input name="Address" #Address="ngModel" [(ngModel)]="customerService.customer.Address" required placeholder="Address" class="form-control">
+    <div class="validation-error" *ngIf="Address.invalid && (Address.dirty || Address.isSubmitted)">
+      Required field
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="col-md-4 pb-2 form-group">
+      <label for="City" class="control-label text-muted crud-label">City</label>
+      <input name="City" #City="ngModel" [(ngModel)]="customerService.customer.City" required placeholder="City" class="form-control">
+      <div class="validation-error" *ngIf="City.invalid && (City.dirty || City.isSubmitted)">
+        Required field
+      </div>
+    </div>
+    <div class="col-md-4 pb-2 form-group" [class.has-error]="State.touched && State.invalid">
+        <label for="State" class="control-label text-muted crud-label">State</label>
+        <select appSelectRequiredValidator name="State" #State="ngModel" [(ngModel)]="customerService.customer.State" required class="form-control">
+          <option value="-1">--Select--</option>
+          <option [value]="s.Abbreviation"  *ngFor="let s of states">
+            {{s.Abbreviation}} - {{s.Name}}
+          </option> 
+        </select>
+        <div class="validation-error" *ngIf="State.touched && State.invalid">
+          State is required
+        </div>
+      </div>
+    <div class="col-md-4 pb-2 form-group">
+      <label for="Zip" class="control-label text-muted crud-label">Zip</label>
+      <input mask="00000-0000" name="Zip" #Zip="ngModel" [(ngModel)]="customerService.customer.Zip" required placeholder="Zip"
+        class="form-control">
+      <div class="validation-error" *ngIf="Zip.invalid && (Zip.dirty || Zip.isSubmitted)">
+        Required field
+      </div>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="col-md-4 pb-2 form-group">
+      <label for="Phone" class="control-label text-muted crud-label">Phone</label>
+      <input mask="(000)-000-0000" name="Phone" #Phone="ngModel" [(ngModel)]="customerService.customer.Phone" required placeholder="Phone"
+        class="form-control">
+      <div class="validation-error" *ngIf="Phone.invalid && (Phone.dirty || Phone.isSubmitted)">
+        Required field
+      </div>
+    </div>
+    <div class="col-md-8 pb-2 form-group">
+      <label for="EmailAddress" class="control-label text-muted crud-label">Email</label>
+      <input name="EmailAddress" email #EmailAddress="ngModel" [(ngModel)]="customerService.customer.EmailAddress" required placeholder="Email"
+        class="form-control">
+      <div *ngIf="EmailAddress.invalid && (EmailAddress.touched || EmailAddress.isSubmitted)" class="validation-error">
+        Email is required.
+      </div>
+      <div class="validation-error" *ngIf="EmailAddress.invalid && EmailAddress.touched && EmailAddress.errors?.email">Invalid email.</div>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-8 gradient-buttons">
+      <button class="btn btn-primary btn-lg btn-block" [disabled]="!CustomerForm.valid" type="submit">
+        <i class="fa fa-save"></i> Submit
+      </button>
+    </div>
+    <div class="form-group col-md-4 gradient-buttons">
+      <button class="btn btn-lg btn-secondary btn-block" (click)="resetForm(CustomerForm)" type="button">
+        <i class="fa fa-repeat"></i> Reset
+      </button>
+    </div>
+  </div>
+</form>
