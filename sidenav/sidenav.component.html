@@ -1,0 +1,43 @@
+<nav class="col-md-2 d-none d-md-block sidebar">
+  <div class="sidebar-sticky">
+    <ul *ngIf="userService.loggedIn" class="nav sidebar-nav flex-column">
+      <li class="sidebar-brand border-brand">
+        <a routerLink="/home" routerLinkActive="active"> 
+          Developer Ninja
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/home" routerLinkActive="active">Home
+          <span class="sr-only">(current)</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/contacts" routerLinkActive="active">Contacts</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/customers" routerLinkActive="active">Customers</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/employees" routerLinkActive="active">Employees</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/products" routerLinkActive="active">Products</a>
+      </li>
+      <li class="nav-item border-brand">
+        <a class="nav-link" routerLink="/suppliers" routerLinkActive="active">Suppliers</a>
+      </li>
+      <li>
+          <a class="nav-link dropdown-toggle" data-toggle="dropdown" routerLink="/adminpanel" routerLinkActive="active" role="button" aria-haspopup="true" aria-expanded="false">Admin</a>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="#">Control Panel</a>
+            <a class="dropdown-item" href="#">Another action</a>
+            <a class="dropdown-item" href="#">Something else here</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Separated link</a>
+          </div>
+        </li>
+      <li class="nav-item">
+        <a class="sidenav-logout-cursor" class="nav-link" role="button" (click)="logout()">Log out</a>
+      </li>
+    </ul>
+  </div>

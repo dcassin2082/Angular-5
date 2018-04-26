@@ -1,0 +1,76 @@
+<div class="crud-container">
+  <div class="card">
+    <div class="card-header">
+      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom dashboard-header ">
+        <h3>Assign User Roles</h3>
+      </div>
+      <div class="card-body">
+        <div class="container table-responsive">
+          <form name="roleForm" #roleForm="ngForm" (ngSubmit)="onSubmit(roleForm)" class="form-crud">
+            <div class="crud-container">
+              <div class="form-row">
+                <div class="col-md-4 pb-2 form-group">
+                  <label for="User" class="control-label text-muted crud-label">User</label>
+                  <!-- <select name="User" #User="ngModel" [(ngModel)]="userService.user.User" required class="form-control"> -->
+                  <select name="User" id="User" class="form-control">
+                    <option value="-1">--Select--</option>
+                    <option>Bitch</option>
+                    <option>Bitch</option>
+                    <option>Bitch</option>
+                  </select>
+                </div>
+                <div style="padding-left: 30px;" class="col-md-4 pb-2 form-group">
+                  <label for="User" class="control-label text-muted crud-label">Roles</label>
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text">
+                        <input type="checkbox" aria-label="Checkbox for following text input"> &nbsp;&nbsp;
+                        <div> Sales</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text">
+                        <input type="checkbox" aria-label="Checkbox for following text input"> &nbsp;&nbsp;
+                        <div> Member</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text">
+                        <input type="checkbox" aria-label="Checkbox for following text input"> &nbsp;&nbsp;
+                        <div> Purchasing</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text">
+                        <input type="checkbox" aria-label="Checkbox for following text input"> &nbsp;&nbsp;
+                        <div> HR</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group pb-2 col-md-4 gradient-buttons">
+                  <button class="btn btn-primary btn-lg btn-block" [disabled]="!roleForm.valid" type="submit">
+                    <i class="fa fa-save"></i> Submit
+                  </button>
+                </div>
+                <div class="form-group pb-2 col-md-2 gradient-buttons">
+                  <button class="btn btn-lg btn-secondary btn-block" (click)="resetForm(roleForm)" type="button">
+                    <i class="fa fa-repeat"></i> Reset
+                  </button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

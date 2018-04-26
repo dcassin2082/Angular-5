@@ -1,0 +1,29 @@
+<div class="row" *ngIf="userClaims">
+  <div class="col-md-5 div-center">
+    <div class="card">
+      <div class="card-body bg-card-header">
+        <span>
+          <h5>Welcome {{userClaims.UserName}}!</h5>
+        </span>
+        <br>
+        <span>Logged On: {{userClaims.LoggedOn}}</span>
+        <br>
+        <p>
+          <strong>{{idleState}}</strong>
+        </p>
+        <p *ngIf="lastPing">
+          <small>Last keepalive ping
+            <strong>{{lastPing | amTimeAgo}}</strong>
+          </small>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-5">
+    <div class="card" class="bg-navbar">
+      <img src="assets/angular-logo.png" height="100%" width="100%">
+    </div>
+  </div>
+</div>
